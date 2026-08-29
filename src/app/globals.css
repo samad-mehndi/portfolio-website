@@ -26,91 +26,171 @@
   --font-mono: var(--font-plex-mono);
 }
 
-* {
-  box-sizing: border-box;
+/*
+ * Everything below is scoped into Tailwind's own `base`/`components` layers
+ * (declared by `@import "tailwindcss"` above as `theme, base, components,
+ * utilities`). Un-layered CSS always wins over layered CSS regardless of
+ * selector specificity, so element-selector resets written outside a layer
+ * (e.g. a bare `h1 { margin: 0 }`) permanently beat Tailwind utility
+ * classes like `my-[22px]` or `text-muted`, no matter how specific the
+ * utility's class selector is. Keeping our resets inside `base` lets
+ * `utilities` (ordered after it) override them as expected.
+ */
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+    background: var(--ink);
+    color: var(--fg);
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    letter-spacing: -0.025em;
+    line-height: 1.02;
+    margin: 0;
+  }
+
+  h1 {
+    font-size: clamp(2.6rem, 6.4vw, 4.6rem);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+  }
+
+  h2 {
+    font-size: clamp(2rem, 4.2vw, 3.1rem);
+  }
+
+  h3 {
+    font-size: 1.22rem;
+    letter-spacing: -0.02em;
+  }
+
+  p {
+    margin: 0;
+  }
+
+  a {
+    color: inherit;
+  }
+
+  a:focus-visible,
+  button:focus-visible {
+    outline: 2px solid var(--hit);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
 }
 
-html {
-  scroll-behavior: smooth;
+@layer components {
+  /* ambient background, rendered once in the root layout */
+  .ambient-bg {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+  }
+
+  .ambient-bg::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(900px 600px at 12% -5%, rgba(122, 140, 255, 0.16), transparent 60%),
+      radial-gradient(700px 500px at 95% 8%, rgba(240, 180, 41, 0.07), transparent 60%),
+      radial-gradient(1000px 700px at 50% 110%, rgba(122, 140, 255, 0.08), transparent 60%);
+  }
+
+  .ambient-bg::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    opacity: 0.35;
+    background-image: radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+    background-size: 44px 44px;
+    mask-image: radial-gradient(ellipse 90% 60% at 50% 20%, #000 20%, transparent 75%);
+    -webkit-mask-image: radial-gradient(ellipse 90% 60% at 50% 20%, #000 20%, transparent 75%);
+  }
+
+  /* hero avatar: drops in once on mount */
+  .avatar-in {
+    animation: avatar-in 0.9s cubic-bezier(0.2, 0.9, 0.3, 1.2) both;
+  }
+
+  /* hero availability dot: pulsing ring */
+  .status-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #5bd8a0;
+    animation: status-ping 2.4s ease-out infinite;
+  }
+
+  /* vector-space results: row entrance */
+  .result-row {
+    opacity: 0;
+    transform: translateY(6px);
+    animation: rise 0.45s ease forwards;
+  }
+
+  /* vector-space results: score bar fill, target width via --w */
+  .score-bar-fill {
+    width: var(--w);
+    animation: bar-fill 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  }
 }
 
-body {
-  margin: 0;
-  background: var(--ink);
-  color: var(--fg);
-  font-family: var(--font-sans);
-  font-size: 16px;
-  line-height: 1.6;
-  -webkit-font-smoothing: antialiased;
+@keyframes avatar-in {
+  from {
+    opacity: 0;
+    transform: translateY(-14px) scale(0.86);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
 
-h1,
-h2,
-h3 {
-  font-family: var(--font-display);
-  font-weight: 600;
-  letter-spacing: -0.025em;
-  line-height: 1.02;
-  margin: 0;
+@keyframes status-ping {
+  0% {
+    box-shadow: 0 0 0 0 rgba(91, 216, 160, 0.55);
+  }
+  70% {
+    box-shadow: 0 0 0 7px rgba(91, 216, 160, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(91, 216, 160, 0);
+  }
 }
 
-h1 {
-  font-size: clamp(2.6rem, 6.4vw, 4.6rem);
-  font-weight: 800;
-  letter-spacing: -0.04em;
+@keyframes rise {
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
 
-h2 {
-  font-size: clamp(2rem, 4.2vw, 3.1rem);
-}
-
-h3 {
-  font-size: 1.22rem;
-  letter-spacing: -0.02em;
-}
-
-p {
-  margin: 0;
-}
-
-a {
-  color: inherit;
-}
-
-/* ambient background, rendered once in the root layout */
-.ambient-bg {
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-}
-
-.ambient-bg::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(900px 600px at 12% -5%, rgba(122, 140, 255, 0.16), transparent 60%),
-    radial-gradient(700px 500px at 95% 8%, rgba(240, 180, 41, 0.07), transparent 60%),
-    radial-gradient(1000px 700px at 50% 110%, rgba(122, 140, 255, 0.08), transparent 60%);
-}
-
-.ambient-bg::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  opacity: 0.35;
-  background-image: radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px);
-  background-size: 44px 44px;
-  mask-image: radial-gradient(ellipse 90% 60% at 50% 20%, #000 20%, transparent 75%);
-  -webkit-mask-image: radial-gradient(ellipse 90% 60% at 50% 20%, #000 20%, transparent 75%);
-}
-
-a:focus-visible,
-button:focus-visible {
-  outline: 2px solid var(--hit);
-  outline-offset: 3px;
-  border-radius: 6px;
+@keyframes bar-fill {
+  from {
+    width: 0;
+  }
+  to {
+    width: var(--w);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

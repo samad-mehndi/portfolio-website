@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 
 type PanelProps = {
-  children: ReactNode;
+  children?: ReactNode;
 };
 
 export default function Panel({ children }: PanelProps) {
