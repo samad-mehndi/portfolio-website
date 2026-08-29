@@ -1,5 +1,15 @@
 import type { Project } from "./types";
 
+// Copy for the Work section's own heading block and tier divider, ported
+// verbatim from v0.html. Lives here rather than profile.ts since it's
+// specific to presenting this file's data, not the site-wide profile.
+export const workSection = {
+  eyebrow: "Selected work",
+  heading: "Things I built and what came out of them",
+  lead: "These span front end work, backend services, retrieval, deep learning, and GPU kernels. Each one started with a problem the obvious approach could not solve, and the interesting part is usually what had to change.",
+  compactLabel: "Also built",
+};
+
 // Order matches the order projects appear in docs/reference/v0.html:
 // five featured, then three compact under "Also built".
 export const projects: Project[] = [
@@ -8,7 +18,10 @@ export const projects: Project[] = [
     title: "JobMap AI",
     meta: "Geospatial job intelligence · Jun 2026",
     tier: "featured",
-    links: [{ label: "Live front end", href: "https://jobmap-ai.vercel.app" }],
+    links: [
+      { label: "Live", href: "https://jobmap-ai.vercel.app" },
+      { label: "GitHub", href: "https://github.com/samad-mehndi/jobmapAI" },
+    ],
     problem: [
       {
         text: "Job boards tell you the title and the company. They do not tell you whether the role actually matches your resume, or where it sits relative to where you live.",
@@ -114,7 +127,12 @@ export const projects: Project[] = [
     title: "AI-Assisted GPU Kernel Generation",
     meta: "Graduate research · Sep 2025",
     tier: "featured",
-    links: [],
+    links: [
+      {
+        label: "GitHub",
+        href: "https://github.com/samad-mehndi/triton-nondeterminism",
+      },
+    ],
     problem: [
       {
         text: "Parallel reductions are nondeterministic. Change the concurrency and the same input gives a different answer, so a kernel can be fast and quietly wrong, and the error only surfaces once it is deep inside a model.",
@@ -151,7 +169,12 @@ export const projects: Project[] = [
     title: "Kidney Disease Classification",
     meta: "Deep learning · May 2025",
     tier: "featured",
-    links: [],
+    links: [
+      {
+        label: "GitHub",
+        href: "https://github.com/samad-mehndi/Kidney-Disease-Classification-Project",
+      },
+    ],
     problem: [
       {
         text: "Classifying kidney disease from CT scans is the easy half. The hard half is making the pipeline reproducible, so a result from three weeks ago can still be explained and repeated.",
@@ -198,6 +221,12 @@ export const projects: Project[] = [
     title: "Mental health support chatbot",
     meta: "Natural language processing",
     tier: "compact",
+    links: [
+      {
+        label: "GitHub",
+        href: "https://github.com/samad-mehndi/NLP-mental-health-chatbot",
+      },
+    ],
     summary:
       "An earlier NLP project centred on working out what a message is actually asking for and responding usefully. It is where I hit the limits of keyword matching, which is what pushed me toward embeddings.",
     tags: ["NLP", "Python", "Transformers"],
@@ -207,6 +236,12 @@ export const projects: Project[] = [
     title: "LocalFix",
     meta: "IT operations platform · In design",
     tier: "compact",
+    links: [
+      {
+        label: "GitHub",
+        href: "https://github.com/samad-mehndi/LocalFix",
+      },
+    ],
     summary:
       "Ticketing, per business asset tracking, and a monitoring agent with threshold alerts, split across a business portal, a technician portal, and an ops dashboard. Architecture is settled, build is starting.",
     tags: ["Next.js", "NestJS", "PostgreSQL", "Redis and BullMQ", "WebSockets"],
