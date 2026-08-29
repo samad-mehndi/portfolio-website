@@ -31,4 +31,15 @@ export const profile: Profile = {
     { label: "LinkedIn", href: "https://www.linkedin.com/in/samad-mehndi" },
   ],
   resumePath: "/resume-swe.pdf",
+  relocationNote: "open to relocation",
+  copyrightNote: "All rights reserved.",
+};
+
+// Copy for the Contact section's own heading block, ported verbatim from
+// v0.html. Lives here, not on `profile`, since it's specific to that one
+// section rather than being a reusable fact about the person.
+export const contactSection = {
+  eyebrow: "Open to work",
+  heading: "Let's build something good",
+  lead: "I am looking for software engineering roles across full stack, machine learning, and data, anywhere in the US. I am based in Dallas and happy to relocate or work remotely. If you need someone who can own a feature from the interface down to the model, I would like to hear about it.",
 };

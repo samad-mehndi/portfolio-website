@@ -4,11 +4,11 @@ export const education: Degree[] = [
   {
     degree: "MS, Computer Engineering",
     school: "The University of Texas at Dallas",
-    // TODO: source this — v0.html has no explicit location line for this
-    // entry (unlike the B.Tech entry below, which pairs "Delhi, India"
-    // with its period). See the phase report for how `period` below was
-    // resolved instead of inventing a split that isn't in the source.
-    location: "TODO: source this",
+    // No `location`: v0.html has no location line for this entry (unlike
+    // the B.Tech entry below, which pairs "Delhi, India" with its period).
+    // `period` carries the source's full "Machine learning focus · May
+    // 2026" line verbatim rather than splitting off a location that isn't
+    // there.
     period: "Machine learning focus · May 2026",
     description:
       "Machine learning and NLP are where the search and retrieval projects on this page started, and computer architecture is where the GPU kernel work started.",

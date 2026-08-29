@@ -51,7 +51,9 @@ export type Role = {
 export type Degree = {
   degree: string;
   school: string;
-  location: string;
+  // Optional: v0.html gives no location for the MS entry (only a focus
+  // descriptor folded into `period`). Omit rather than invent one.
+  location?: string;
   period: string;
   description: string;
   coursework?: string[];
@@ -92,4 +94,10 @@ export type Profile = {
   email: string;
   links: Link[];
   resumePath: string;
+  // Short status line for the footer, e.g. "open to relocation".
+  relocationNote: string;
+  // Trailing phrase in the footer's copyright line, e.g.
+  // "All rights reserved." Combined with the year and `name` by the
+  // component: "© {year} {name}. {copyrightNote}"
+  copyrightNote: string;
 };

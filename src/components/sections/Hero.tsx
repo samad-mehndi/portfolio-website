@@ -3,11 +3,11 @@
 import { Fragment, useState } from "react";
 import Section from "@/components/layout/Section";
 import Panel from "@/components/ui/Panel";
+import Eyebrow from "@/components/ui/Eyebrow";
+import Button from "@/components/ui/Button";
+import { ArrowRightIcon } from "@/components/ui/icons";
 import VectorSpace from "@/features/vector-space/VectorSpace";
 import { profile } from "@/content/profile";
-
-const BUTTON =
-  "inline-flex items-center gap-[9px] rounded-full border border-line-2 bg-white/[.04] px-5 py-[11px] text-[.9rem] font-medium text-fg transition-[transform,background-color,border-color] duration-200 ease-[ease] hover:-translate-y-0.5 hover:border-white/[.28] hover:bg-white/[.09]";
 
 function Avatar() {
   const [imgFailed, setImgFailed] = useState(false);
@@ -46,9 +46,7 @@ export default function Hero() {
           <div className="flex items-center gap-3.5">
             <Avatar />
             <div className="flex flex-col gap-1.5">
-              <span className="inline-flex items-center gap-2.5 font-mono text-[.72rem] uppercase tracking-[.14em] text-muted before:h-px before:w-[22px] before:bg-accent before:opacity-80 before:content-['']">
-                {profile.role}
-              </span>
+              <Eyebrow>{profile.role}</Eyebrow>
               <span className="inline-flex items-center gap-2 font-mono text-[.72rem] tracking-[.04em] text-muted">
                 <span className="status-dot" aria-hidden="true" />
                 {profile.availability}
@@ -91,24 +89,11 @@ export default function Hero() {
           </p>
 
           <div className="mt-[30px] flex flex-wrap gap-3">
-            <a href="#work" className={`${BUTTON} border-accent bg-accent font-semibold text-[#080A12] shadow-[0_14px_40px_-14px_rgba(122,140,255,.8)] hover:border-[#8E9CFF] hover:bg-[#8E9CFF]`}>
+            <Button href="#work" variant="primary">
               See the work
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth={2}
-                strokeLinecap="round"
-                className="size-[15px]"
-                aria-hidden="true"
-              >
-                <path d="M5 12h14" />
-                <path d="m12 5 7 7-7 7" />
-              </svg>
-            </a>
-            <a href={`mailto:${profile.email}`} className={BUTTON}>
-              Get in touch
-            </a>
+              <ArrowRightIcon className="size-[15px]" />
+            </Button>
+            <Button href={`mailto:${profile.email}`}>Get in touch</Button>
           </div>
 
           <div className="mt-[52px] grid grid-cols-4 border-t border-line max-[940px]:grid-cols-2 max-[940px]:gap-x-3">

@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from "react";
 import { profile } from "@/content/profile";
+import Button from "@/components/ui/Button";
+import { DownloadIcon } from "@/components/ui/icons";
 
 // Section anchors, not sourced content: these mirror the page's own
 // section ids rather than carrying any copy of their own.
@@ -11,8 +13,6 @@ const NAV_LINKS = [
   { label: "Education", href: "#education" },
   { label: "Contact", href: "#contact" },
 ];
-
-const BUTTON = "inline-flex items-center gap-[9px] rounded-full border border-line-2 bg-white/[.04] px-[15px] py-2 text-[.82rem] font-medium text-fg transition-[transform,background-color,border-color] duration-200 ease-[ease] hover:-translate-y-0.5 hover:border-white/[.28] hover:bg-white/[.09]";
 
 export default function Header() {
   const [stuck, setStuck] = useState(false);
@@ -54,34 +54,17 @@ export default function Header() {
         </nav>
 
         <div className="flex items-center gap-[9px]">
-          <a
-            href={profile.resumePath}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={BUTTON}
-          >
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth={2}
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="size-[13px]"
-              aria-hidden="true"
-            >
-              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-              <path d="M7 10l5 5 5-5" />
-              <path d="M12 15V3" />
-            </svg>
+          <Button href={profile.resumePath} small external>
+            <DownloadIcon className="size-[13px]" />
             Resume
-          </a>
-          <a
+          </Button>
+          <Button
             href={`mailto:${profile.email}`}
-            className={`${BUTTON} max-[560px]:hidden`}
+            small
+            className="max-[560px]:hidden"
           >
             Email me
-          </a>
+          </Button>
         </div>
       </div>
     </header>
